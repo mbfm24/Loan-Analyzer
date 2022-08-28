@@ -105,11 +105,12 @@ print(present_value)
 #I created a variable to identify loan price so I could compare it to present_value.
 loan_price = loan.get ("loan_price")
 
-#If else statement created to compare present_value to loan_price, it will show whether or not the loan is worth buying.
+#If else statement created to compare present_value to loan_price.
+# it will show whether or not the loan is worth buying.
 
 if present_value >= loan_price:
     print ("The loan is worth at least the cost to buy it. ")
-    
+
 elif present_value < loan_price:
 
     print ("That loan is too expensive and not worth the price.")
@@ -199,13 +200,14 @@ loans = [
 inexpensive_loans = []
 
 # @TODO: Loop through all the loans and append any that cost $500 or less to the `inexpensive_loans` list
-for cheap_loan in loans:
-    if cheap_loan ["loan_price"] <= 500:
-        inexpensive_loans.append(cheap_loan)
+for loan_price in loans:
+    if loan_price ["loan_price"] <= 500:
+        inexpensive_loans.append(loan_price)
 
 
 # @TODO: Print the `inexpensive_loans` list
 
+#Print statement that shows all that loans that are $500 or less.
 print(inexpensive_loans)
 
 
@@ -231,4 +233,15 @@ output_path = Path("inexpensive_loans.csv")
 
 # @TODO: Use the csv library and `csv.writer` to write the header row
 # and each row of `loan.values()` from the `inexpensive_loans` list.
-# YOUR CODE HERE!
+csvpath = Path ("inexpensive_loans.csv")
+
+#Print statement show that data is being written into a CSV file.
+print("Writing the data to a CSV file...")
+
+with open(csvpath, "w") as csvfile:
+    # Create a csvwriter
+    csvwriter = csv.writer(csvfile, delimiter=",")
+
+    csvwriter.writerow(header)
+    for item in inexpensive_loans:
+        csvwriter.writerow(item.values())
